@@ -1,4 +1,4 @@
-package signature;
+package file;
 
 abstract class CharacterHider {
     private static final byte MUL = -1;
