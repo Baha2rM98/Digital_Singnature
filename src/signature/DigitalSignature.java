@@ -31,7 +31,7 @@ public class DigitalSignature extends FileManager {
             String hashedValue = sha512.SHA512(text);
             sign = rsa.encryption(hashedValue);
         }
-        if (isTxtFile(file)) {
+        if (isTextFile(file)) {
             String text = readFile(file);
             String hashedValue = sha512.SHA512(text);
             sign = rsa.encryption(hashedValue);

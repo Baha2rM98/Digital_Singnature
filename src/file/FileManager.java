@@ -99,13 +99,12 @@ public abstract class FileManager {
         return file;
     }
 
-    public boolean isBinaryFile(File file) throws FileNotFoundException {
-        String text = readFile(file);
-        return text.length() == 0 || file.getName().equals(BinarySuffix);
+    public boolean isTextFile(File file) {
+        return file.getName().contains(TXTSuffix);
     }
 
-    public boolean isTxtFile(File file) throws FileNotFoundException {
-        String text = readFile(file);
-        return text.length() != 0 || file.getName().equals(TXTSuffix);
+    public boolean isBinaryFile(File file) {
+        return file.getName().contains(BinarySuffix);
     }
+
 }
