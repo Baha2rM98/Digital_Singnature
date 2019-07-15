@@ -1,11 +1,12 @@
 package signature;
 
-//Created by Baha2r
+/**
+ * @author Baha2r
+ **/
 
 import file.FileManager;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class DigitalSignature extends FileManager {
@@ -43,16 +44,18 @@ public class DigitalSignature extends FileManager {
         return rsa.encryption(hashedValue);
     }
 
-    public String makeSignFromFile(File file) throws FileNotFoundException {
-        String text = readFile(file);
-        String hashedValue = sha512.SHA512(text);
-        return rsa.encryption(hashedValue);
-    }
-
-    public String makeSignFromBinaryFile(File file) throws IOException {
-        String text = readBinaryFile(file);
-        String hashedValue = sha512.SHA512(text);
-        return rsa.encryption(hashedValue);
+    public String makeSignFromFile(File file) throws IOException {
+        if (isTextFile(file)) {
+            String text = readFile(file);
+            String hashedValue = sha512.SHA512(text);
+            return rsa.encryption(hashedValue);
+        }
+        if (isBinaryFile(file)) {
+            String text = readBinaryFile(file);
+            String hashedValue = sha512.SHA512(text);
+            return rsa.encryption(hashedValue);
+        }
+        return null;
     }
 
     public void isVerified(String sign) {

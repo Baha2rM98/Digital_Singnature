@@ -6,12 +6,6 @@ import java.util.Scanner;
 public abstract class FileManager {
     private final String BinarySuffix = ".bin";
     private final String TXTSuffix = ".txt";
-    private FileOutputStream fos;
-    private ObjectOutputStream os;
-    private FileInputStream fis;
-    private ObjectInputStream ois;
-    private Scanner reader;
-    private FileWriter fw;
 
     protected FileManager() {
     }
@@ -45,8 +39,8 @@ public abstract class FileManager {
     }
 
     public String readBinaryFile(File file) throws IOException {
-        fis = new FileInputStream(file);
-        ois = new ObjectInputStream(fis);
+        FileInputStream fis = new FileInputStream(file);
+        ObjectInputStream ois = new ObjectInputStream(fis);
         final int size = ois.available();
         byte[] bytes = new byte[size];
         for (int i = 0; i < size; i++) {
@@ -68,7 +62,7 @@ public abstract class FileManager {
     }
 
     public String readFile(File file) throws FileNotFoundException {
-        reader = new Scanner(file);
+        Scanner reader = new Scanner(file);
         StringBuilder textBuilder = new StringBuilder();
         while (reader.hasNextLine()) {
             textBuilder.append(reader.nextLine());
@@ -79,8 +73,8 @@ public abstract class FileManager {
     public File writeBinaryFile(File directory, String fileName, String text) throws IOException {
         File file = makeBinaryFile(directory, fileName);
         assert file != null;
-        fos = new FileOutputStream(file);
-        os = new ObjectOutputStream(fos);
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream os = new ObjectOutputStream(fos);
         os.write(CharacterHider.hide(text));
         os.flush();
         os.close();
@@ -92,7 +86,7 @@ public abstract class FileManager {
     public File writeFile(File directory, String fileName, String text) throws IOException {
         File file = makeFile(directory, fileName);
         assert file != null;
-        fw = new FileWriter(file);
+        FileWriter fw = new FileWriter(file);
         fw.write(text);
         fw.flush();
         fw.close();
