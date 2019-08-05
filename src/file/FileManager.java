@@ -1,5 +1,9 @@
 package file;
 
+/**
+ * @author Baha2r
+ **/
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -10,7 +14,7 @@ public abstract class FileManager {
     protected FileManager() {
     }
 
-    public File makeFile(File directory, String fileName) throws IOException {
+    private File makeFile(File directory, String fileName) throws IOException {
         if (!directory.isDirectory()) {
             System.err.println("This is not a directory!");
             return null;
@@ -24,7 +28,7 @@ public abstract class FileManager {
         return file;
     }
 
-    public File makeBinaryFile(File directory, String fileName) throws IOException {
+    private File makeBinaryFile(File directory, String fileName) throws IOException {
         if (!directory.isDirectory()) {
             System.err.println("This is not a directory!");
             return null;
@@ -38,7 +42,7 @@ public abstract class FileManager {
         return file;
     }
 
-    public String readBinaryFile(File file) throws IOException {
+    protected String readBinaryFile(File file) throws IOException {
         FileInputStream fis = new FileInputStream(file);
         ObjectInputStream ois = new ObjectInputStream(fis);
         final int size = ois.available();
@@ -52,7 +56,7 @@ public abstract class FileManager {
         return new String(buf);
     }
 
-    public void deleteFile(File file) {
+    protected void deleteFile(File file) {
         if (!file.exists()) {
             System.err.println("There is not anything to delete!");
             return;
@@ -61,7 +65,7 @@ public abstract class FileManager {
             file.delete();
     }
 
-    public String readFile(File file) throws FileNotFoundException {
+    protected String readFile(File file) throws FileNotFoundException {
         Scanner reader = new Scanner(file);
         StringBuilder textBuilder = new StringBuilder();
         while (reader.hasNextLine()) {
@@ -70,7 +74,7 @@ public abstract class FileManager {
         return textBuilder.toString();
     }
 
-    public File writeBinaryFile(File directory, String fileName, String text) throws IOException {
+    protected File writeBinaryFile(File directory, String fileName, String text) throws IOException {
         File file = makeBinaryFile(directory, fileName);
         assert file != null;
         FileOutputStream fos = new FileOutputStream(file);
@@ -83,7 +87,7 @@ public abstract class FileManager {
         return file;
     }
 
-    public File writeFile(File directory, String fileName, String text) throws IOException {
+    protected File writeFile(File directory, String fileName, String text) throws IOException {
         File file = makeFile(directory, fileName);
         assert file != null;
         FileWriter fw = new FileWriter(file);
@@ -93,11 +97,11 @@ public abstract class FileManager {
         return file;
     }
 
-    public boolean isTextFile(File file) {
+    protected boolean isTextFile(File file) {
         return file.getName().contains(TXTSuffix);
     }
 
-    public boolean isBinaryFile(File file) {
+    protected boolean isBinaryFile(File file) {
         return file.getName().contains(BinarySuffix);
     }
 
