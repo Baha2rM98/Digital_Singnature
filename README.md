@@ -1,6 +1,6 @@
 # Digital_Singnature
 
-NOTICE: it is just a simple impelemention of digital singnature system :)
+NOTICE: it is just a simple impelemention of digital singnature system and it is not efficient enough :)
 
 Digital singnature is an encrypted value of a hashed string.
 In this project you can make digital signature frome a string or a text file or a binary file.
